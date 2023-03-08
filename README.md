@@ -57,9 +57,13 @@ mv config/config.example.env config/config.env
 🔥 And now **run**:
 
 ```bash
-docker-compose --env-file config/config.env up --build
+make run
 ```
 
+## deploy
+```bash
+cd deploy && make start && make waitlogs
+```
 ## ❤️ Top donations
 You can be in this list: <a href="https://github.com/karfly/chatgpt_telegram_bot/blob/main/static/donate/donate.md#%EF%B8%8F-donate" alt="Donate shield"><img src="https://img.shields.io/badge/-Donate-red?logo=undertale" /></a>
 
