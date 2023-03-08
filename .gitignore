@@ -136,3 +136,4 @@ docker-compose.dev.yml
 .gitsecret/keys/random_seed
 !*.secret
 config/secret.env
+config/secrets.yml
