@@ -1,7 +1,7 @@
 SHELL:=/usr/bin/env bash
 
 # $(V).SILENT:
-STACK_NAME = chatgpt-telegram-bot
+STACK_NAME ?= chatgpt-telegram-bot
 TMP_DIR = /tmp/$(STACK_NAME)_liasudfoui34
 STATE_FILE = $(TMP_DIR)/state.yaml
 
