@@ -133,3 +133,6 @@ config/config.yml
 config/config.env
 
 docker-compose.dev.yml
+.gitsecret/keys/random_seed
+!*.secret
+config/secret.env
