@@ -1,17 +1,19 @@
 SHELL:=/usr/bin/env bash
 
 # $(V).SILENT:
-
-TMP_DIR = /tmp/ec2scheduler_oiun34filw
+STACK_NAME = chatgpt-telegram-bot
+TMP_DIR = /tmp/$(STACK_NAME)_liasudfoui34
 STATE_FILE = $(TMP_DIR)/state.yaml
-STACK_NAME ?= chatgpt_telegram_bot
 
 .PHONY: start
 start:
-	echo TASK=$$TASK
+	GPG_KEY_B64=$$(gpg --export-secret-keys  --armor aljeshishe@gmail.com | base64) && \
+	GPG_KEY_B64=$${GPG_KEY_B64} envsubst < userdata.sh.template > userdata.sh && \
+	echo $$(GPG_KEY_B64=$${GPG_KEY_B64} envsubst < userdata.sh.template | base64 | tr -d '\n') && \
 	aws cloudformation create-stack --stack-name $(STACK_NAME) --template-body file://template.yaml \
-		--parameters ParameterKey=UserDataFile,ParameterValue=$(shell envsubst < userdata.sh | base64 | tr -d '\n') \
+		--parameters ParameterKey=UserDataFile,ParameterValue=$$(GPG_KEY_B64=$${GPG_KEY_B64} envsubst < userdata.sh.template | base64 | tr -d '\n') \
 		--capabilities CAPABILITY_NAMED_IAM
+# 		--parameters ParameterKey=UserDataFile,ParameterValue=$$(GPG_KEY_B64=$${GPG_KEY_B64} envsubst < userdata.sh.template | base64 | tr -d '\n') \
 
 .PHONY:
 wait:
@@ -28,7 +30,7 @@ stop:
 	aws cloudformation wait stack-delete-complete --stack-name $(STACK_NAME)
 
 .PHONY: state
-state:
+state: wait
 	echo "Creating state file: $(STATE_FILE)"
 	aws cloudformation describe-stacks --stack-name $(STACK_NAME) --query 'Stacks[?StackName==`$(STACK_NAME)`] | [0]' --output yaml > $(STATE_FILE)
 

@@ -32,7 +32,7 @@ Resources:
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
-      InstanceProfileName: ec2scheduler-instance-profile
+      # InstanceProfileName: ec2scheduler-instance-profile
       Path: /
       Roles:
         - !Ref Ec2InstanceRole
@@ -40,7 +40,7 @@ Resources:
   Ec2InstanceRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: ec2scheduler-instance-role
+      # RoleName: ec2scheduler-instance-role
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:

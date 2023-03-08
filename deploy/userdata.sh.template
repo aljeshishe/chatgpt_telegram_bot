@@ -1,0 +1,10 @@
+#!/bin/bash
+set -ex
+
+sudo apt update && sudo apt install git-secret docker.io docker-compose -y
+git clone https://github.com/aljeshishe/chatgpt_telegram_bot
+cd chatgpt_telegram_bot
+echo ${GPG_KEY_B64} | base64 -d | gpg --import -
+git secret reveal
+sudo docker-compose --env-file config/config.env  up --build
+
