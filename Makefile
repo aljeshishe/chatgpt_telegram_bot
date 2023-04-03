@@ -1,6 +1,8 @@
 SHELL := /usr/bin/env bash
 
 .PHONY: run
-run:
-	git secret reveal -f
+run: config/secrets.yml
 	docker-compose up --build
+
+config/secrets.yml:
+	git secret reveal -f
