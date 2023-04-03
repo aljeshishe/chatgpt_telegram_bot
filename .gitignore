@@ -138,4 +138,4 @@ docker-compose.dev.yml
 config/secret.env
 config/secrets.yml
 .idea
-mongodb
+mongodb/
